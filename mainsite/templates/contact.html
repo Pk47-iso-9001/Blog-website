@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% block title %}
+BroCauli | Contact Us</title>
+{% endblock %}
+
+{% block header %}
+<!-- Header -->
+    <header class="">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="{% url 'index' %}"><h2>Bro<em>Cauli</em></h2></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">Home
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li> 
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'about'%}">About Us</a>
+              </li>
+
+              <!-- Authentication -->
+              {% if request.user.is_superuser %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+              </li>
+              {% endif %}
+              {% if request.user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+              </li>
+              {% else %}
+            
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login / Signup</a>
+            </li>
+            
+             {% endif %}          
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    {% endblock %}
+
+    {% block contact %}
+    <!-- Page Content -->
+    <div class="page-heading contact-heading header-text">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-content">
+              <h4>contact us</h4>
+              <h2>let’s get in touch</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="find-us">
+      <div class="container">
+          <div class="col-md-4">
+            <div class="left-content">
+              <ul class="social-icons">
+                {% for abouts in about %}
+                <h4>We are Available on: </h4>
+                <li><a target="_blank" href="{{abouts.facebook}}"><i class="fa fa-facebook"></i></a></li>
+                <li><a target="_blank" href="{{abouts.twitter}}"><i class="fa fa-twitter"></i></a></li>
+                <li><a target="_blank" href="{{abouts.linkedin}}"><i class="fa fa-linkedin"></i></a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="send-message">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+        
+            <div class="section-heading">
+              <h2>Send us a Message</h2>
+            </div>
+          </div> 
+          <div class="col-md-8">
+            <div class="contact-form">
+                                                                                             
+              <form id="contact" action="contact_us" method="post">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="username"  type="text" class="form-control" id="name" placeholder="Full Name" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="email"  type="text" class="form-control" id="email" placeholder="E-Mail Address" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="subject" type="text" class="form-control" id="subject" placeholder="Subject" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message" required=""></textarea>
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    
+                    <fieldset>
+                      <button type="submit" id="form-submit" class="filled-button">Send Message</button>
+                    </fieldset>
+                  </div>
+                  
+                </div>
+              </form><br>
+              {% if username %}
+               <h4>Hey!  {{username}}</h4>
+                  <p> We received your email ...</p>
+                   {% endif %}
+            
+            </div>
+           </div>
+           <div class="col-md-4">
+            <ul class="accordion">
+              <li>
+                <a>Regarding Content: </a>
+                <div class="content">
+                    <p>If you want your article to be published here, we can do that for you. We will publish your article by giving you the proper credit. For that, you can message us through the message option provided aside this. </p>
+                </div>
+                  
+              </li>
+              <li>
+                <a>Regarding Advertisement: </a>
+                  <div class="content">
+                      <p>If you want your products, contents or any other stuffs to be promoted.We accept paid promotion. For that you can message us throught the message option given aside of this box. We would be very happy if we can do that for you.</p>
+                  </div>
+ 
+              </li>
+              <li>
+                  <a>Regarding Queries: </a>
+                  <div class="content">
+                      <p>If you have any query or suggestion then you can message us about that. We will try our best to help you. And your suggestion will be highly implemented.</p>
+                  </div>
+              </li>
+              <li>
+                  <a>Regarding this Template </a>
+                  <div class="content">
+                      <p>We got this template from <a rel="nofollow noopener" href="https://templatemo.com" target="_blank">TemplateMo.</a> We are very thankful to TemplateMo for providing this template for free.</p>
+                  </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

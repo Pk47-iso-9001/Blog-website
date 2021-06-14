@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <title>BroCauli | Dasbhoard</title>
+	<link rel="shortcut icon" href="static/img/demo3.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- jQuery UI -->
+    <link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet" media="screen">
+
+    <!-- Bootstrap -->
+    <link href="{% static 'dashboard/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- styles -->
+    <link href="{% static 'dashboard/css/styles.css' %}" rel="stylesheet">
+
+<!-- <link rel="shortcut icon" href="static/img/demo3.png" type="image/png"> -->
+<link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+<!-- Additional CSS Files -->
+<link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">  
+<link rel="stylesheet" href="{% static 'assets/css/templatemo-sixteen.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/owl.css' %}"> 
+	<style>
+	 #delete, #update{
+	font-size: 9px;
+	padding: 6px 12px;
+	}
+	#add-more, #delete, #update
+	{
+	font-weight: 300;	
+	text-transform: capitalize;
+	border-radius: 5px;
+	display: inline-block;
+	transition: all 0.3s;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+#add-more{
+	font-size: 14px;
+	padding: 10px 20px;
+	background-color: #26a52c;
+	color: #fff;
+}
+ #add-more:hover{
+	background-color: green;
+	color: #fff;
+} 
+#update{
+	background-color: rgb(98, 160, 175);
+	color: #fff;
+}
+#delete{
+	background-color: #c71c1c;
+	color: #fff;
+}
+#update:hover{
+	background-color: rgb(33, 53, 109);
+	color: #fff;
+}
+#delete:hover{
+	background-color: #8f0707;
+	color: #fff;
+}
+#add-more, #update, #delete{
+	text-decoration:none;
+}
+	</style> 
+  </head>
+  <body>    <!-- Header -->
+    <header class="">
+		<nav class="navbar navbar-expand-lg">
+		  <div class="container">
+			<a class="navbar-brand" href="{% url 'index' %}"><h2>Bro<em>Cauli</em></h2></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			  <span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+			  <ul class="navbar-nav ml-auto">
+				<li class="nav-item">
+				  <a class="nav-link" href="{% url 'index' %}">Home
+					<span class="sr-only">(current)</span>
+				  </a>
+				</li> 	
+				<li class="nav-item">
+				  <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+			    </li>
+				<li class="nav-item">
+				<a class="nav-link" href="{% url 'about' %}">About Us</a>
+			  </li>
+				
+  <!-- Authentication -->
+				{% if request.user.is_authenticated %}
+				<li class="nav-item active">
+				  <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+				</li>
+			  
+				<li class="nav-item">
+				  <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+				</li>			  
+			   {% endif %}
+			  </li>			
+			  </ul>
+			</div>
+		  </div>
+		</nav>
+  </header>
+<br>
+<br><br>
+
+    <div class="page-content">
+    	<div class="row">
+		  <div class="col-md-10">
+
+			  <!-- Home-Page main Blog -->
+  			<div class="content-box-large">
+  				<div class="panel-heading">
+					<center><div class="panel-title">Main Blog In Home-Page</div></center><br>
+					
+				</div>
+				<a href="{% url 'add_blog' %}" id='add-more'>Add Blog</a> 
+  				<div class="panel-body">
+  					<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+						<thead>
+							<tr>
+								<th>Content</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for blog in blog %}
+							<tr class="odd gradeX">
+								<td>{{blog.title}}</td>
+								  <td>
+							        <a href="{% url 'edit_blog' blog.id %}" id='update'>Update</a>
+        							<form action="{% url 'delete_blog' blog.id %}" method="post">
+										{% csrf_token %}
+										<input type="submit" value="Delete" id='delete'>									
+									</form>			
+								
+								  </td>						
+							</tr>
+						{% endfor %}				
+						</tbody>
+					</table>
+  				</div>
+  			</div>
+		</div>
+	  </div>
+  </div>
+
+
+  <div class="page-content">
+	<div class="row">
+	  <div class="col-md-10">
+		  <!-- Home-Page Header -->
+		  <div class="content-box-large">
+			  <div class="panel-heading">
+				<center><div class="panel-title">Today's Special</div></center><br>
+				
+			</div>
+			<a href="{% url 'add_header' %}" id='add-more'>Add+</a> 
+			  <div class="panel-body">
+				  <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+					<thead>
+						<tr>
+							<th>Content</th>
+							<th>Action</th>
+						
+						</tr>
+					</thead>
+					<tbody>
+					{% for header in header %}
+						<tr class="odd gradeX">
+							 <td>{{header.title}}</td>
+							  <td>
+								<a href="{% url 'edit_header' header.id %}" id='update'>Update</a>
+								<form action="{% url 'delete_header' header.id %}" method="post">
+									{% csrf_token %}
+									<input type="submit" value="Delete" id='delete'>									
+								</form>				
+							  </td>						
+						</tr>
+					{% endfor %}				
+					</tbody>
+				</table>
+			  </div>
+		  </div>
+	</div>
+  </div>
+</div>
+
+<div class="page-content">
+	<div class="row">
+	  <div class="col-md-10">
+
+		  <!-- About Us -->
+		  <div class="content-box-large">
+			  <div class="panel-heading">
+				<center><div class="panel-title">About Us</div></center><br>
+				
+			</div>
+			<a href="{% url 'add_about' %}" id='add-more'>Add+</a> 
+			  <div class="panel-body">
+				  <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+					<thead>
+						<tr>
+							<th>Content</th>			
+							<th>Action</th>	
+						</tr>
+					</thead>
+					<tbody>
+					{% for about in about %}
+						<tr class="odd gradeX">
+					       <td>{{about.desc}}</td>
+							  <td>
+								<a href="{% url 'edit_about' about.id %}" id='update'>Update</a>
+								<form action="{% url 'delete_about' about.id %}" method="post">
+									{% csrf_token %}
+									<input type="submit" value="Delete" id='delete'>									
+								</form>			
+							  </td>						
+						</tr>
+					{% endfor %}				
+					</tbody>
+				</table>
+			  </div>
+		  </div>
+	</div>
+  </div>
+</div>
+
+
+<div class="page-content">
+	<div class="row">
+	  <div class="col-md-10">
+		  <!-- Our Team -->
+		  <div class="content-box-large">
+			  <div class="panel-heading">
+				<center><div class="panel-title">Our Team</div></center><br>
+				
+			</div>
+			<a href="{% url 'add_team' %}" id='add-more'>Add+</a> 
+			  <div class="panel-body">
+				  <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+					<thead>
+						<tr>
+							<th>Content</th>
+							<th>Description</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for team in team %}
+						<tr class="odd gradeX">
+							<td>{{team.name}}</td>
+							<td>{{team.desc}}</td>
+							  <td>
+								<a href="{% url 'edit_team' team.id %}" id='update'>Update</a>	
+								<form action="{% url 'delete_team' team.id %}" method="post">
+									{% csrf_token %}
+									<input type="submit" value="Delete" id='delete'>									
+								</form>			
+							  </td>						
+						</tr>
+					{% endfor %}				
+					</tbody>
+				</table>
+			  </div>
+		  </div>
+	</div>
+  </div>
+</div>
+
+<div class="page-content">
+	<div class="row">
+	  <div class="col-md-10">
+
+		  <!-- Tecnnology-->
+		  <div class="content-box-large">
+			  <div class="panel-heading">
+				<center><div class="panel-title">Technology</div></center><br>
+				
+			</div>
+			<a href="{% url 'add_tech' %}" id='add-more'>Add+</a> 
+			  <div class="panel-body">
+				  <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+					<thead>
+						<tr>
+							<th>Content</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for tech in tech %}
+						<tr class="odd gradeX">
+							<td>{{tech.title}}</td>
+							  <td>
+								<a href="{% url 'edit_tech' tech.id %}" id='update'>Update</a>	
+								<form action="{% url 'delete_tech' tech.id %}" method="post">
+									{% csrf_token %}
+									<input type="submit" value="Delete" id='delete'>									
+								</form>				
+							  </td>						
+						</tr>
+					{% endfor %}				
+					</tbody>
+				</table>
+			  </div>
+		  </div>
+	</div>
+  </div>
+</div>
+
+<div class="page-content">
+	<div class="row">
+	  <div class="col-md-10">
+
+		  <!-- Personality -->
+		  <div class="content-box-large">
+			  <div class="panel-heading">
+				<center><div class="panel-title">Personality</div></center><br>
+				
+			</div>
+			<a href="{% url 'add_person' %}" id='add-more'>Add+</a> 
+			  <div class="panel-body">
+				  <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+					<thead>
+						<tr>
+							<th>Content</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for person in person %}
+						<tr class="odd gradeX">
+							  <td>{{person.title}}</td>						
+							  <td>
+								<a href="{% url 'edit_person' person.id %}" id='update'>Update</a>	
+								<form action="{% url 'delete_person' person.id %}" method="post">
+									{% csrf_token %}
+									<input type="submit" value="Delete" id='delete'>									
+								</form>			
+							  </td>						
+						</tr>
+					{% endfor %}				
+					</tbody>
+				</table>
+			  </div>
+		  </div>
+	</div>
+  </div>
+</div>
+
+
+<div class="page-content">
+	<div class="row">
+	  <div class="col-md-10">
+		  <!-- Random Blog -->
+		  <div class="content-box-large">
+			  <div class="panel-heading">
+				<center><div class="panel-title">Random</div></center><br>
+				
+			</div>
+			<a href="{% url 'add_random' %}" id='add-more'>Add+</a> 
+			  <div class="panel-body">
+				  <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+					<thead>
+						<tr>
+							<th>Content</th>
+							<th>  Action</th>
+						
+						</tr>
+					</thead>
+					<tbody>
+					{% for random in random %}
+						<tr class="odd gradeX">
+							  <td>{{random.title}}</td>
+		
+							  <td>
+								<a href="{% url 'edit_random' random.id %}" id='update'>Update</a>
+								
+								<form action="{% url 'delete_random' random.id %}" method="post">
+									{% csrf_token %}
+									<input type="submit" value="Delete" id='delete'>									
+								</form>					
+							  </td>						
+						</tr>
+					{% endfor %}				
+					</tbody>
+				</table>
+			  </div>
+		  </div>
+	</div>
+  </div>
+</div>
+
+  </body>
+</html>

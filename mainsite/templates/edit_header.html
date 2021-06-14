@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <title>Bootstrap Admin Theme v3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- jQuery UI -->
+    <link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet" media="screen">
+
+    <!-- Bootstrap -->
+    <link href="static/dashboard/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- styles -->
+    <link href="static/dashboard/css/styles.css" rel="stylesheet">
+
+<!-- <link rel="shortcut icon" href="static/img/demo3.png" type="image/png"> -->
+<link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+<!-- Additional CSS Files -->
+<link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">  
+<link rel="stylesheet" href="{% static 'assets/css/templatemo-sixteen.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/owl.css' %}"> 
+  <style>  
+  form{
+margin-left: 20px;
+} 
+  #delete, #update{
+  font-size: 9px;
+  padding: 6px 12px;
+margin-top: 4px;
+  }
+  #add-more, #delete, #update
+  {
+  font-weight: 300;	
+  text-transform: capitalize;
+  border-radius: 5px;
+  display: inline-block;
+  transition: all 0.3s;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+#add-more{
+  font-size: 14px;
+  padding: 10px 20px;
+  background-color: #26a52c;
+  color: #fff;
+}
+#add-more:hover{
+  background-color: green;
+  color: #fff;
+} 
+#update{
+  background-color: rgb(98, 160, 175);
+  color: #fff;
+}
+#delete{
+  background-color: #c71c1c;
+  color: #fff;
+}
+#update:hover{
+  background-color: rgb(33, 53, 109);
+  color: #fff;
+}
+#delete:hover{
+  background-color: #8f0707;
+  color: #fff;
+}
+#add-more, #update, #delete{
+  text-decoration:none;
+}
+  </style> 
+  </head>
+  <body>    <!-- Header -->
+    <header class="">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+      <a class="navbar-brand" href="{% url 'index' %}"><h2>Bro<em>Cauli</em></h2></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'index' %}">Home
+          <span class="sr-only">(current)</span>
+          </a>
+        </li> 	
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+        </li>
+         
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'about' %}">About Us</a>
+        </li>            			
+        </ul>
+      </div>
+      </div>
+    </nav>
+  </header>
+<br>
+<br><br><br>
+<form action ="{% url 'edit_header' header.id %}" method='post'enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p}}
+  
+  <input type='submit' id='update' value='Update' >
+  <a href = "{% url 'dashboard'  %}" id='delete'> Cancel </a>
+  </form>
+ 
+
+<br><br>
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% block title %}
+Brocauli | Home
+{% endblock %}
+{% block style %}
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+rel="stylesheet"
+integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+crossorigin="anonymous"/>
+
+<style>
+  #myBtn1, #myBtn2{
+    background-color: #f33f3f;
+    color: #fff;
+    font-size: 14px;
+    text-transform: capitalize;
+    font-weight: 300;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+    transition: all 0.3s;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  #myBtn1:hover, #myBtn2:hover{
+    background-color: #121212;
+    color: #fff;
+  }
+  #more1, #more2 {display: none;}
+  </style> 
+{% endblock %}
+
+    
+{% block header %}
+    <!-- Header -->
+    <header class="">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="{% url 'index' %}"><h2>Bro<em>Cauli</em></h2></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'index' %}">Home
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'technology' %}">Content</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+              </li>
+             
+              <li class="nav-item">
+              <a class="nav-link" href="{% url 'about' %}">About Us</a>
+            </li>
+              
+<!-- Authentication -->
+             
+              {% if request.user.is_superuser %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+              </li>
+              {% endif %}
+              {% if request.user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+              </li>
+              {% else %}
+            
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            
+             {% endif %}
+            
+          
+            </ul>
+          </div>
+        </div>
+      </nav>
+</header>
+
+{% endblock %}
+
+{% block quote %}
+    <!-- Page Content -->
+    <!-- Banner Starts Here -->
+{% for quote in quote %}
+    <div class="banner header-text">
+      <div class="owl-banner owl-carousel">
+        <div class="banner-item-01">
+          <div class="text-content">
+            <h4 style="color: rgb(224, 75, 75);">{{quote.head}}</h4>
+            <h4 style="color: aliceblue;">{{quote.one}}</h4>
+          </div>
+        </div>
+        <div class="banner-item-02">
+          <div class="text-content">
+            <h4 style="color: aliceblue;">{{quote.two}}</h4> 
+            </div>
+        </div>
+        <div class="banner-item-03">
+          <div class="text-content">
+            <h4 style="color: aliceblue;">{{quote.three}}</h4>
+          </div> 
+        </div>
+      </div>
+       
+    </div>
+{% endfor %}    
+   <!-- Banner Ends Here -->   
+         <section class="blog-post-area">
+           <div class="container">
+              <div class="row">
+                  <div class="blog-post-area-style"> 
+                        <!-- Today's Special -->
+                        <div class="best-features about-features">
+                          <div class="container">
+                            <div class="row">
+                              {% for header in headers %}
+                              <div class="col-md-6">
+                                <div class="right-image">
+                                  <img src={{header.image.url}} alt="">
+                                </div>
+                              </div>
+                            
+                              <div class="col-md-6">
+                                <div class="left-content">
+                                  <h4>{{header.title}}</h4>
+                                  <p>{{header.before}}<br><span id="dots1">...</span><span id="more1">{{header.after}}</span></p>
+                                  <button onclick="myFunction1()" id="myBtn1">Read more</button>
+                                 
+                                </div>
+                              </div>
+                              {% endfor %}
+                            </div>
+                          </div>
+                        </div>
+
+                           {% for blog in blogs %} 
+                          <!-- Content starts from here for me -->
+                          <div class="col-md-47">
+                              <div class="single-post">
+                                {% if blog.image.url %}
+                                  <img src='{{blog.image.url}}' alt="No image Available">
+                                {% endif %}
+                                  <h3><a href="#">{{blog.title}} </a></h3>
+                                                    
+                          <p>{{blog.desc}}</p>
+                            </div>
+                          </div>
+                          {% endfor %}
+                  </div>
+              </div>
+          </div>  
+          <!-- Content ends here -->
+        </section>
+{% endblock %}
+
+       
+
+
+

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}
+BroCauli | Technology
+{% endblock %}
+
+
+{% block header %}
+ <!-- Header -->
+ <header class="">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}"><h2>Bro<em>Cauli</em></h2></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item ">
+              <a class="nav-link" href="{% url 'index' %}">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li> 
+           
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'technology' %}">Technology</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'personality' %}">Personality</a>
+            </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'random' %}">Random</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  {% endblock%}
+
+  {% block tech %}
+  <br>
+  <section class="blog-post-area">
+    <div class="container">
+        <div class="row">
+            <div class="blog-post-area-style">                
+                     {% for tech in techs %} 
+                    <!-- Content starts from here for me -->
+                    <div class="col-md-47">
+                        <div class="single-post">
+                            <img src='{{tech.image.url}}' alt="No image Available">
+                            <h3><a href="#">{{tech.title}} </a></h3>
+                            <h4><span>Posted By: <span class="author-name">{{tech.author}}</span></span>
+                            </h4>                       
+                    <p>{{tech.desc}}</p>
+                      </div>
+                    </div>
+                    {% endfor %}
+            </div>
+        </div>
+    </div>  
+    <!-- Content ends here -->
+{% endblock %}
+ 
