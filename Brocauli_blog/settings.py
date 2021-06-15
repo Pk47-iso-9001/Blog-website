@@ -10,12 +10,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-# SECRET_KEY = os.environ['SECRET_KEY']
-SECRET_KEY ='dc@x6$guj*cl2vn2+((0ina+owtd5^=c_6bc&j&emj_8zgd8l2'
+SECRET_KEY = os.environ['SECRET_KEY']
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['brocauli.herokuapp.com']
 
 
 # Application definition
@@ -125,6 +125,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 EMAIL_HOST ='smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER ='nepalprabhu123@gmail.com'
-# EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
-EMAIL_HOST_PASSWORD='ombqdgiovamqzhid'
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 EMAIL_USE_TLS = True
