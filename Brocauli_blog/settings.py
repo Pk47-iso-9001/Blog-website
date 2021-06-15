@@ -69,9 +69,9 @@ DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "Brocauli_blog",
-        "USER": "postgres",
+        "USER": "rbizmdrmwkchkd",
         "PASSWORD": os.environ['DATABASE_PASSWORD'],
-        "HOST": "localhost",
+        "HOST": "ec2-23-23-164-251.compute-1.amazonaws.com",
     }
 }
 
