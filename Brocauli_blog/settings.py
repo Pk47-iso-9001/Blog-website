@@ -67,11 +67,13 @@ WSGI_APPLICATION = 'Brocauli_blog.wsgi.application'
 
 DATABASES = {
     'default': {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "Brocauli_blog",
-        "USER": "rbizmdrmwkchkd",
-        "PASSWORD": os.environ['DATABASE_PASSWORD'],
-        "HOST": "ec2-23-23-164-251.compute-1.amazonaws.com",
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR/ 'db.sqlite3',
+        # "ENGINE": "django.db.backends.postgresql",
+        # "NAME": "Brocauli_blog",
+        # "USER": "rbizmdrmwkchkd",
+        # "PASSWORD": os.environ['DATABASE_PASSWORD'],
+        # "HOST": "ec2-23-23-164-251.compute-1.amazonaws.com",
     }
 }
 
