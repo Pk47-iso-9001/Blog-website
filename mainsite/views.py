@@ -83,10 +83,12 @@ def edit_blog(request, id):
             if form.is_valid():
                 form.save()
                 return redirect('dashboard')
+
         else:
             id = Blog.objects.get(pk=id)
             form = PostForm(instance=id)
             return render(request, 'edit_blog.html', {'form':form, 'blog': id})
+            
     else:
         return HttpResponse("You don't have access for this site....")
 

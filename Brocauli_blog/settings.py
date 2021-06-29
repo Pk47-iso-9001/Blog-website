@@ -10,14 +10,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY ='dc@x6$guj*cl2vn2+((0ina+owtd5^=c_6bc&j&emj_8zgd8l2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['brocauli.herokuapp.com']
-
-
+ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
@@ -69,11 +67,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR/ 'db.sqlite3',
-        # "ENGINE": "django.db.backends.postgresql",
-        # "NAME": "Brocauli_blog",
-        # "USER": "rbizmdrmwkchkd",
-        # "PASSWORD": os.environ['DATABASE_PASSWORD'],
-        # "HOST": "ec2-23-23-164-251.compute-1.amazonaws.com",
+
     }
 }
 
@@ -122,8 +116,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
 # Email Display unlock captcha
-EMAIL_HOST ='smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER ='nepalprabhu123@gmail.com'
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
-EMAIL_USE_TLS = True
+# EMAIL_HOST ='smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER ='#' # your gmail id
+# EMAIL_HOST_PASSWORD = '#'  # your gmail password
+# EMAIL_USE_TLS = True
